@@ -9,14 +9,15 @@ import 'package:src/app/domains/connect_provider/usecase.dart';
 import 'package:src/app/domains/pool_sale_token/entity/data_token_entity.dart';
 import 'package:src/app/domains/pool_sale_token/entity/token_sale_entity.dart';
 import 'package:src/app/domains/pool_sale_token/usecase.dart';
-
 import 'package:src/app/views/home/widget/form_buy_token_sale.dart';
+
 import 'widget/form_create_token_sale.dart';
 
 enum UpdateHomePage { connectButton, image, tokenSales, page, information }
 
 class HomeController extends GetxController {
   HomeController(this._connectProviderUseCase, this._poolSaleTokenUseCase);
+
   final PoolSaleTokenUseCase _poolSaleTokenUseCase;
   final ConnectProviderUseCase _connectProviderUseCase;
 
@@ -30,6 +31,7 @@ class HomeController extends GetxController {
   bool get isConnectedTotal =>
       _connectProviderUseCase.isConnected &&
       !_connectProviderUseCase.isWrongConnect;
+
   bool get isDisconnect => !_connectProviderUseCase.isConnected;
 
   bool get isWrongConnected =>
@@ -95,9 +97,9 @@ class HomeController extends GetxController {
         totalSupply: totalSupply * BigInt.from(pow(10, decimal)),
         saleRate: BigInt.from(saleRate * pow(10, decimal)),
         baseRate: BigInt.from(baseRate * pow(10, 6)),
-        minCap: BigInt.from(_minCap * pow(10, 6) / pow(10, decimal)),
+        minCap: BigInt.from(_minCap * pow(10, 6)),
         maxCap: BigInt.from(
-          _maxCap * pow(10, 6) / pow(10, decimal),
+          _maxCap * pow(10, 6),
         ),
       );
       await _poolSaleTokenUseCase.getTokenSaleOfPool();
